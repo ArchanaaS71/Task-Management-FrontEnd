@@ -95,7 +95,7 @@ function CardModal({ card, onClose, onDelete }) {
         >
           <h2 style={{ marginBottom: "20px" }}>{currentCard.title}</h2>
 
-          <h4>Dates</h4>
+          <h4>Due Date and Time</h4>
           {!editingDue ? (
             <div style={{ marginBottom: "20px" }}>
               <p>{dueDate ? `${dueDate} ${dueTime}` : "No due date"}</p>

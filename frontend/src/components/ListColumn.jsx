@@ -12,6 +12,7 @@ function ListColumn({ list, cards, onAddCard, onCardClick }) {
 
   return (
     <div
+      onClick={(e) => e.stopPropagation()}
       style={{
         minWidth: "280px",
         padding: "24px",
@@ -64,28 +65,6 @@ function ListColumn({ list, cards, onAddCard, onCardClick }) {
                       ...provided.draggableProps.style,
                     }}
                   >
-                    {card.labels?.length > 0 && (
-                      <div
-                        style={{
-                          display: "flex",
-                          gap: "6px",
-                          marginBottom: "8px",
-                        }}
-                      >
-                        {card.labels.map((label) => (
-                          <div
-                            key={label.id}
-                            style={{
-                              width: "36px",
-                              height: "6px",
-                              backgroundColor: label.color,
-                              borderRadius: "4px",
-                            }}
-                          />
-                        ))}
-                      </div>
-                    )}
-
                     {card.title}
                   </div>
                 )}
@@ -96,37 +75,39 @@ function ListColumn({ list, cards, onAddCard, onCardClick }) {
         )}
       </Droppable>
 
-      <input
-        placeholder="Add a card"
-        value={newCardTitle}
-        onChange={(e) => setNewCardTitle(e.target.value)}
-        style={{
-          marginTop: "18px",
-          width: "100%",
-          padding: "10px 14px",
-          borderRadius: "10px",
-          border: "1px solid #2f3440",
-          background: "#151821",
-          color: "var(--text-h)",
-          boxSizing: "border-box",
-        }}
-      />
+      <div onClick={(e) => e.stopPropagation()}>
+        <input
+          placeholder="Add a card"
+          value={newCardTitle}
+          onChange={(e) => setNewCardTitle(e.target.value)}
+          style={{
+            marginTop: "18px",
+            width: "100%",
+            padding: "10px 14px",
+            borderRadius: "10px",
+            border: "1px solid #2f3440",
+            background: "#151821",
+            color: "var(--text-h)",
+            boxSizing: "border-box",
+          }}
+        />
 
-      <button
-        onClick={handleAddCard}
-        style={{
-          marginTop: "12px",
-          padding: "10px",
-          borderRadius: "12px",
-          border: "none",
-          background: "var(--accent)",
-          color: "white",
-          fontSize: "14px",
-          cursor: "pointer",
-        }}
-      >
-        Add Card
-      </button>
+        <button
+          onClick={handleAddCard}
+          style={{
+            marginTop: "12px",
+            padding: "10px",
+            borderRadius: "12px",
+            border: "none",
+            background: "var(--accent)",
+            color: "white",
+            fontSize: "14px",
+            cursor: "pointer",
+          }}
+        >
+          Add Card
+        </button>
+      </div>
     </div>
   );
 }

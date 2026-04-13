@@ -44,6 +44,20 @@ function BoardDetails() {
     loadBoard();
   };
 
+  const addCard = async (listId, title) => {
+    const cards = cardsByList[listId] || [];
+
+    await api.post("/cards", {
+      title,
+      list_id: listId,
+      position: cards.length + 1,
+      description: null,
+      due_date: null,
+    });
+
+    loadBoard();
+  };
+
   const onDragEnd = async (result) => {
     const { source, destination, draggableId } = result;
     if (!destination) return;
@@ -107,7 +121,7 @@ function BoardDetails() {
                   <ListColumn
                     list={list}
                     cards={cardsByList[list.id] || []}
-                    onAddCard={() => {}}
+                    onAddCard={addCard}
                     onCardClick={setSelectedCard}
                   />
                   {provided.placeholder}
